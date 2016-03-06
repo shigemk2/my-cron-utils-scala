@@ -20,6 +20,9 @@ object Hello {
     val validator = new CronValidator(cronDefinition)
     println(validator.isValid("* * * * *"))
     println(validator.isValid("hoge"))
+    val scheduler = new Scheduler()
+    scheduler.schedule("* * * * *", new CronTask())
+    println(scheduler.getGuid)
     // try {
     //   val scheduler = new Scheduler()
     //   scheduler.schedule("* * * * *", new CronTask())
