@@ -8,6 +8,7 @@ import com.cronutils.mapper.CronMapper
 import com.cronutils.parser.CronParser
 import com.cronutils.model.CronType
 import com.cronutils.model.definition.CronDefinitionBuilder
+import com.cronutils.validator.CronValidator
 import it.sauronsoftware.cron4j._
 
 object Hello {
@@ -16,6 +17,9 @@ object Hello {
     val cronDefinition =  CronDefinitionBuilder.instanceDefinitionFor(CronType.CRON4J)
     val cron4jParser= new CronParser(cronDefinition)
     println(descriptor.describe(cron4jParser.parse("/2 * * * *")))
+    val validator = new CronValidator(cronDefinition)
+    println(validator.isValid("* * * * *"))
+    println(validator.isValid("hoge"))
     // try {
     //   val scheduler = new Scheduler()
     //   scheduler.schedule("* * * * *", new CronTask())
