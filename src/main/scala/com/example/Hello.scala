@@ -1,13 +1,11 @@
 package com.example
 
-import java.lang.InterruptedException
-import java.util.{Locale, Date}
+import java.util.{Date, Locale}
 
 import com.cronutils.descriptor.CronDescriptor
-import com.cronutils.mapper.CronMapper
-import com.cronutils.parser.CronParser
 import com.cronutils.model.CronType
 import com.cronutils.model.definition.CronDefinitionBuilder
+import com.cronutils.parser.CronParser
 import com.cronutils.validator.CronValidator
 import it.sauronsoftware.cron4j._
 
@@ -18,11 +16,22 @@ object Hello {
     val cron4jParser= new CronParser(cronDefinition)
     println(descriptor.describe(cron4jParser.parse("/2 * * * *")))
     val validator = new CronValidator(cronDefinition)
-    println(validator.isValid("* * * * *"))
+    println(validator.isValid("30-59 11 * * *"))
     println(validator.isValid("hoge"))
     val scheduler = new Scheduler()
     scheduler.schedule("* * * * *", new CronTask())
-    println(scheduler.getGuid)
+    scheduler.start
+    val scheduler2 = new Scheduler()
+    scheduler2.schedule("* * * * *", new CronTask())
+    scheduler2.start
+    val scheduler3 = new Scheduler()
+    scheduler3.schedule("* * * * *", new CronTask())
+    scheduler3.start
+    val scheduler4 = new Scheduler()
+    scheduler4.schedule("* * * * *", new CronTask())
+    scheduler4.start
+
+
     // try {
     //   val scheduler = new Scheduler()
     //   scheduler.schedule("* * * * *", new CronTask())
